@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:objects.properties"/>
+    <context:component-scan base-package="Model"/>
+    <context:component-scan base-package="Controller"/>
+    <context:component-scan base-package="View"/>
+
+    <bean id="planeBean"
+          class="Model.Plane"
+          init-method="doInit"
+          destroy-method="doDestroy">
+        <property name="colorCode" value="0xFFFFFF"/>
+        <property name="x" value="${plane.x}"/>
+        <property name="y" value="${plane.y}"/>
+    </bean>
+
+    <bean id="regularPolygonBean"
+          class="Model.RegularPolygon"
+          scope="prototype">
+        <constructor-arg value="${regularPolygon.x}"/>
+        <constructor-arg value="${regularPolygon.y}"/>
+        <constructor-arg value="${regularPolygon.numberOfVortexes}"/>
+        <constructor-arg value="${regularPolygon.sideLength}"/>
+    </bean>
+
+    <bean id="circleBean"
+          class="Model.Circle"
+          scope="prototype">
+        <constructor-arg value="${circle.radius}"/>
+    </bean>
+</beans>
